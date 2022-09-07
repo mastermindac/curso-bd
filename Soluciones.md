@@ -6,8 +6,46 @@ correo y contraseña, aunque también nos interesa almacenar su nombre completo.
 Para cada tarea, queremos almacenar su título, descripción, estado (completada
 o no completada) y fecha límite para completarla.
 
+<details>
+<summary>Diseño conceptual</summary>
+
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/todos.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/todos.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+En este ejercicio tenemos una relación uno a muchos. Hay dos formas de
+representar una relación uno a muchos mediante tablas. La primera consiste en
+colocar una clave ajena a la entidad que participa con cardinalidad máxima uno:
+<br><br>
+
+<img style="width: 100%;" src="./diagrams.net/relations/dark/one-to-many.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/relations/light/one-to-many.svg#gh-light-mode-only">
+
+<br>
+
+Así es como se vería el diseñó lógico en este caso:
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/todos.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/todos.svg#gh-light-mode-only">
+
+<br>
+
+La segunda forma de representar la relación es a través de una tabla intermedia:
+
+<img style="width: 100%;" src="./diagrams.net/relations/dark/todos-intermediate.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/relations/light/todos-intermediate.svg#gh-light-mode-only">
+
+<br>
+
+Así es como se vería en este caso el diseño lógico:
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/todos-intermediate.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/todos-intermediate.svg#gh-light-mode-only">
+</details>
+
 
 # Ejercicio 2: Taxis
 
@@ -26,8 +64,47 @@ Cada vehículo solo puede ser utilizado al mismo tiempo por un taxista, y
 nuestra apliación permitirá definir el periodo en el cual dicho taxista conduce
 el vehículo, por ejemplo desde el 12 de abril de 2022 hasta el 16 de octubre de
 
+<details>
+<summary>Diseño conceptual</summary>
+<br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/taxis.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/taxis.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+Este ejercicio cuenta con una relación uno a uno, para la cual tenemos de nuevo
+dos formas de representarla. La primera, igual que antes, consiste en colocar
+una clave ajena en una de las entidades:
+<br><br>
+
+<img style="width: 100%;" src="./diagrams.net/relations/dark/taxis.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/relations/light/taxis.svg#gh-light-mode-only">
+
+<br>
+
+El diseño lógico en este caso sería así:
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/taxis.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/taxis.svg#gh-light-mode-only">
+
+<br>
+
+La segunda opción, parecida a las relaciones uno a muchos, consiste en utilizar
+una tabla intermedia con dos claves ajenas:
+
+<img style="width: 100%;" src="./diagrams.net/relations/dark/taxis-intermediate.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/relations/light/taxis-intermediate.svg#gh-light-mode-only">
+
+<br>
+
+En este caso, así es como quedaría el diseño:
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/taxis-intermediate.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/taxis-intermediate.svg#gh-light-mode-only">
+
+</details>
 
 # Ejercicio 3: Chat Rooms
 
@@ -48,8 +125,30 @@ cada rol queremos almacenar el nombre y una descripción.
 Finalmente, queremos almacenar la fecha incluyendo hora y minuto de cada mensaje
 que se envía en cada sala, así como el usuario que lo ha enviado.
 
+<details>
+<summary>Diseño conceptual</summary>
+<br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/chat-rooms.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/chat-rooms.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+
+Las relaciones muchos a muchos solo se pueden representar mediante tabla
+intermedia:
+
+<img style="width: 100%;" src="./diagrams.net/relations/dark/chat-rooms.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/relations/light/chat-rooms.svg#gh-light-mode-only">
+
+<br>
+
+Por tanto, así es como quedaría el diseño lógico:
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/chat-rooms.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/chat-rooms.svg#gh-light-mode-only">
+</details>
 
 # Ejercicio 4: Seguros
 
@@ -68,8 +167,32 @@ El cliente podrá elegir cuál es el porcentaje de los gastos totales de
 reparación que cubrirá el seguro al contratarlo, por ejemplo un 40%. Este dato
 también será necesario para calcular el precio anual.
 
+<details>
+<summary>Diseño conceptual</summary>
+<br>
+
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/insurances.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/insurances.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+
+Existen varias formas de representar jerarquías de generalización con tablas.
+En este caso, optaremos por utilizar una tabla genérica y una tabla por cada
+subtipo con el que cuenta la jerarquía:
+
+<img style="width: 100%;" src="./diagrams.net/relations/dark/insurances.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/relations/light/insurances.svg#gh-light-mode-only">
+
+<br>
+
+Así es como queda el diseño lógico con esta solución:
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/insurances.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/insurances.svg#gh-light-mode-only">
+</details>
 
 # Ejercicio 5: Departamentos y empleados
 
@@ -86,8 +209,21 @@ pero puede repetirse para empleados de diferentes departamentos. Y para
 terminar, los empleados pueden tener a su cargo a otros empleados, queremos
 almacenar esta información.
 
+<details>
+<summary>Diseño conceptual</summary>
+<br>
+
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/departments.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/departments.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+
+<img style="width: 100%;" src="./diagrams.net/logic/dark/departments.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/departments.svg#gh-light-mode-only">
+</details>
 
 # Ejercicio 6: Red social
 
@@ -109,10 +245,17 @@ sus propios posts. De cada comentario nos interesa almacenar el texto y la fecha
 en la que se ha publicado.
 
 <details>
-<summary>Ver solución</summary>
+<summary>Diseño conceptual</summary>
 <br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/social-network.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/social-network.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+<img style="width: 100%;" src="./diagrams.net/logic/dark/social-network.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/social-network.svg#gh-light-mode-only">
 </details>
 
 # Ejercicio 7: App de pagos
@@ -148,10 +291,17 @@ así como la fecha de emisión de la transferencia y la fecha de finalización
 (cuando se ha completado o cancelado).
 
 <details>
-<summary>Ver solución</summary>
+<summary>Diseño conceptual</summary>
 <br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/payments.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/payments.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+<img style="width: 100%;" src="./diagrams.net/logic/dark/payments.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/payments.svg#gh-light-mode-only">
 </details>
 
 # Ejercicio 8: Ecommerce
@@ -189,8 +339,15 @@ en prepararse, enviarse y llegar a su destino, queremos almacenar su estado
 ("procesando", "enviado", "entregado", "cancelado").
 
 <details>
-<summary>Ver solución</summary>
+<summary>Diseño conceptual</summary>
 <br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/ecom.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/ecom.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño lógico</summary>
+<br>
+<img style="width: 100%;" src="./diagrams.net/logic/dark/ecom.svg#gh-dark-mode-only">
+<img style="width: 100%;" src="./diagrams.net/logic/light/ecom.svg#gh-light-mode-only">
 </details>
