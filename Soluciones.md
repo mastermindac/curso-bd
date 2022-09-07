@@ -26,7 +26,6 @@ Cada vehículo solo puede ser utilizado al mismo tiempo por un taxista, y
 nuestra apliación permitirá definir el periodo en el cual dicho taxista conduce
 el vehículo, por ejemplo desde el 12 de abril de 2022 hasta el 16 de octubre de
 
-
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/taxis.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/taxis.svg#gh-light-mode-only">
 
@@ -49,7 +48,6 @@ cada rol queremos almacenar el nombre y una descripción.
 Finalmente, queremos almacenar la fecha incluyendo hora y minuto de cada mensaje
 que se envía en cada sala, así como el usuario que lo ha enviado.
 
-
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/chat-rooms.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/chat-rooms.svg#gh-light-mode-only">
 
@@ -70,7 +68,6 @@ El cliente podrá elegir cuál es el porcentaje de los gastos totales de
 reparación que cubrirá el seguro al contratarlo, por ejemplo un 40%. Este dato
 también será necesario para calcular el precio anual.
 
-
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/insurances.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/insurances.svg#gh-light-mode-only">
 
@@ -88,7 +85,6 @@ disponemos de su número de empleado, que es único dentro de cada departamento,
 pero puede repetirse para empleados de diferentes departamentos. Y para
 terminar, los empleados pueden tener a su cargo a otros empleados, queremos
 almacenar esta información.
-
 
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/departments.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/departments.svg#gh-light-mode-only">
@@ -112,9 +108,12 @@ Los usuarios podrán escibir comentarios en los posts de otros usuarios o en
 sus propios posts. De cada comentario nos interesa almacenar el texto y la fecha
 en la que se ha publicado.
 
-
+<details>
+<summary>Ver solución</summary>
+<br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/social-network.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/social-network.svg#gh-light-mode-only">
+</details>
 
 # Ejercicio 7: App de pagos
 
@@ -148,9 +147,12 @@ varios días queremos saber su estado ("procesando", "completada", "cancelada"),
 así como la fecha de emisión de la transferencia y la fecha de finalización
 (cuando se ha completado o cancelado).
 
-
+<details>
+<summary>Ver solución</summary>
+<br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/payments.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/payments.svg#gh-light-mode-only">
+</details>
 
 # Ejercicio 8: Ecommerce
 
@@ -186,6 +188,9 @@ los otros campos del pedido. Por último, como el pedido puede tardar varios dí
 en prepararse, enviarse y llegar a su destino, queremos almacenar su estado
 ("procesando", "enviado", "entregado", "cancelado").
 
-
+<details>
+<summary>Ver solución</summary>
+<br>
 <img style="width: 100%;" src="./diagrams.net/conceptual/dark/ecom.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/conceptual/light/ecom.svg#gh-light-mode-only">
+</details>
