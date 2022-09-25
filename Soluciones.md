@@ -517,6 +517,11 @@ Los usuarios podrán escibir comentarios en los posts de otros usuarios o en
 sus propios posts. De cada comentario nos interesa almacenar el texto y la fecha
 en la que se ha publicado.
 
+> **Warning**
+> Los tres diseños de este ejercicio tendrás que hacerlos tú durante el curso,
+> no veas las soluciones hasta haber llegado a la parte del curso donde se pide
+> que hagas un diseño concreto y lo hayas terminado.
+
 <details>
 <summary>Diseño conceptual</summary>
 <br>
@@ -636,6 +641,11 @@ al banco o viceversa). Además, como las transferencia bancarias pueden tardar
 varios días queremos saber su estado ("procesando", "completada", "cancelada"),
 así como la fecha de emisión de la transferencia y la fecha de finalización
 (cuando se ha completado o cancelado).
+
+> **Warning**
+> Los tres diseños de este ejercicio tendrás que hacerlos tú durante el curso,
+> no veas las soluciones hasta haber llegado a la parte del curso donde se pide
+> que hagas un diseño concreto y lo hayas terminado.
 
 <details>
 <summary>Diseño conceptual</summary>
@@ -773,6 +783,11 @@ país, provincia, ciudad, calle, número y, opcionalmente, unidad
 los otros campos del pedido. Por último, como el pedido puede tardar varios días
 en prepararse, enviarse y llegar a su destino, queremos almacenar su estado
 ("procesando", "enviado", "entregado", "cancelado").
+
+> **Warning**
+> Los tres diseños de este ejercicio tendrás que hacerlos tú durante el curso,
+> no veas las soluciones hasta haber llegado a la parte del curso donde se pide
+> que hagas un diseño concreto y lo hayas terminado.
 
 <details>
 <summary>Diseño conceptual</summary>
