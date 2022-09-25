@@ -46,6 +46,33 @@ Así es como se vería en este caso el diseño lógico:
 <img style="width: 100%;" src="./diagrams.net/logic/light/todos-intermediate.svg#gh-light-mode-only">
 </details>
 
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE tasks (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(512) NOT NULL,
+    completed BOOLEAN NOT NULL,
+    due_date DATETIME NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+```
+</details>
+
 
 # Ejercicio 2: Taxis
 
@@ -106,6 +133,57 @@ En este caso, así es como quedaría el diseño:
 
 </details>
 
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE drivers (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE parkings (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    city VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    number VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE vehicles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    parking_id INT UNSIGNED NULL,
+    plate_number VARCHAR(255) NOT NULL UNIQUE,
+    brand VARCHAR(255) NOT NULL,
+    model VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (parking_id) REFERENCES parkings(id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
+
+CREATE TABLE vehicle_image (
+    vehicle_id INT UNSIGNED NOT NULL,
+    url VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE driver_vehicle (
+    driver_id INT UNSIGNED NOT NULL PRIMARY KEY,
+    vehicle_id INT UNSIGNED NOT NULL UNIQUE,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+
+    FOREIGN KEY (driver_id) REFERENCES drivers(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+```
+</details>
+
 # Ejercicio 3: Chat Rooms
 
 Queremos desarrollar una apliación donde los usuarios puedan crear salas de chat
@@ -148,6 +226,104 @@ Por tanto, así es como quedaría el diseño lógico:
 
 <img style="width: 100%;" src="./diagrams.net/logic/dark/chat-rooms.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/logic/light/chat-rooms.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE rooms (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(512) NOT NULL,
+    is_private BOOLEAN NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE user_room (
+    user_id INT UNSIGNED NOT NULL,
+    room_id INT UNSIGNED NOT NULL,
+
+    PRIMARY KEY (user_id, room_id),
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (room_id) REFERENCES rooms(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE messages (
+    user_id INT UNSIGNED NOT NULL,
+    room_id INT UNSIGNED NOT NULL,
+    content VARCHAR(512) NOT NULL,
+    date DATETIME NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (room_id) REFERENCES rooms(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE invitations (
+    user_id INT UNSIGNED NOT NULL,
+    room_id INT UNSIGNED NOT NULL,
+    link VARCHAR(255) NOT NULL,
+
+    PRIMARY KEY (user_id, room_id),
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (room_id) REFERENCES rooms(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE roles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    room_id INT UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(512) NOT NULL,
+
+    FOREIGN KEY (room_id) REFERENCES rooms(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE user_role (
+    user_id INT UNSIGNED NOT NULL,
+    role_id INT UNSIGNED NOT NULL,
+
+    PRIMARY KEY (user_id, role_id),
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+```
 </details>
 
 # Ejercicio 4: Seguros
@@ -194,6 +370,58 @@ Así es como queda el diseño lógico con esta solución:
 <img style="width: 100%;" src="./diagrams.net/logic/light/insurances.svg#gh-light-mode-only">
 </details>
 
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE clients (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_document_number VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE insurances (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    client_id INT UNSIGNED NOT NULL,
+    percentage_covered TINYINT UNSIGNED NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    annual_cost DECIMAL(8, 2) NOT NULL,
+    type ENUM("VEHICLE", "PROPERTY"),
+
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CHECK (percentage_covered <= 100)
+);
+
+CREATE TABLE vehicles (
+    insurance_id INT UNSIGNED NOT NULL,
+    price DECIMAL(8, 2) NOT NULL,
+    plate_number VARCHAR(255) NOT NULL UNIQUE,
+
+    FOREIGN KEY (insurance_id) REFERENCES insurances(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE properties (
+    insurance_id INT UNSIGNED NOT NULL,
+    area DECIMAL(6,2) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    number VARCHAR(255) NOT NULL,
+    unit VARCHAR(255) NULL,
+
+    FOREIGN KEY (insurance_id) REFERENCES insurances(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+```
+</details>
+
 # Ejercicio 5: Departamentos y empleados
 
 Nuestra empresa cuenta con varias oficinas situadas en edificios diferentes y
@@ -223,6 +451,51 @@ almacenar esta información.
 
 <img style="width: 100%;" src="./diagrams.net/logic/dark/departments.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/logic/light/departments.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE buildings (
+    city VARCHAR(255) NOT NULL,
+    number INT UNSIGNED NOT NULL,
+
+    PRIMARY KEY (city, number)
+);
+
+CREATE TABLE departments (
+    number VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    annual_budget DECIMAL(9, 2) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    building_number INT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (city, building_number)
+        REFERENCES buildings(city, number)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE employees (
+    number INT UNSIGNED NOT NULL,
+    department_number VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    manager_number INT UNSIGNED NOT NULL,
+    manager_department_number VARCHAR(255) NOT NULL,
+
+    PRIMARY KEY (number, department_number),
+
+    FOREIGN KEY (department_number) REFERENCES departments(number)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    FOREIGN KEY (manager_number, manager_department_number)
+        REFERENCES employees(number, department_number)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+```
 </details>
 
 # Ejercicio 6: Red social
@@ -256,6 +529,80 @@ en la que se ha publicado.
 <br>
 <img style="width: 100%;" src="./diagrams.net/logic/dark/social-network.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/logic/light/social-network.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE profiles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    profile_picture VARCHAR(255) NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE follows (
+    profile_id INT UNSIGNED  NOT NULL,
+    following_profile_id INT UNSIGNED  NOT NULL,
+
+    PRIMARY KEY (profile_id, follow_profile_id),
+
+    FOREIGN KEY (profile_id) REFERENCES profiles(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (follow_profile_id) REFERENCES profiles(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    profile_id INT UNSIGNED NOT NULL,
+    description VARCHAR(512) NULL,
+
+    FOREIGN KEY (profile_id) REFERENCES profiles(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE post_images (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    post_id INT UNSIGNED NOT NULL,
+    url VARCHAR(255) NOT NULL UNIQUE,
+
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    post_id INT UNSIGNED NOT NULL,
+    profile_id INT UNSIGNED NOT NULL,
+    comment VARCHAR(512),
+
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (profile_id) REFERENCES profiles(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+```
 </details>
 
 # Ejercicio 7: App de pagos
@@ -304,6 +651,95 @@ así como la fecha de emisión de la transferencia y la fecha de finalización
 <img style="width: 100%;" src="./diagrams.net/logic/light/payments.svg#gh-light-mode-only">
 </details>
 
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255)
+);
+
+CREATE TABLE accounts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(512) NOT NULL,
+    balance DECIMAL(12, 2) NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE corporate_accounts (
+    account_id INT UNSIGNED PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    tax_id VARCHAR(255) NOT NULL UNIQUE,
+
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE transfers (
+    from_account_id INT UNSIGNED NOT NULL,
+    to_account_id INT UNSIGNED NOT NULL,
+    amount DECIMAL(12, 2) NOT NULL,
+    date DATETIME NOT NULL,
+    status ENUM("PAYED", "REFUNDED") NOT NULL,
+
+    FOREIGN KEY (from_account_id) REFERENCES accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+   FOREIGN KEY (to_account_id) REFERENCES accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE bank_accounts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    number VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE bank_associations (
+    bank_account_id INT UNSIGNED NOT NULL,
+    account_id INT UNSIGNED NOT NULL,
+
+    PRIMARY KEY (bank_account_id, account_id),
+
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    FOREIGN KEY (bank_account_id) REFERENCES bank_accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE bank_transfers (
+    bank_account_id INT UNSIGNED NOT NULL,
+    account_id INT UNSIGNED NOT NULL,
+    direction ENUM("INCOMING", "OUTGOING") NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    status ENUM("PROCESSING", "COMPLETED", "CANCELED"),
+    amount DECIMAL(12, 2),
+
+    FOREIGN KEY (account_id) REFERENCES accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    FOREIGN KEY (bank_account_id) REFERENCES bank_accounts(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+```
+</details>
+
 # Ejercicio 8: Ecommerce
 
 Queremos crear un marketplace similar a Amazon donde los usuarios puedan crear
@@ -350,4 +786,130 @@ en prepararse, enviarse y llegar a su destino, queremos almacenar su estado
 <br>
 <img style="width: 100%;" src="./diagrams.net/logic/dark/ecom.svg#gh-dark-mode-only">
 <img style="width: 100%;" src="./diagrams.net/logic/light/ecom.svg#gh-light-mode-only">
+</details>
+
+<details>
+<summary>Diseño físico</summary>
+
+```sql
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE addresses (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    country VARCHAR(255) NOT NULL,
+    province VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    street VARCHAR(512) NOT NULL,
+    number VARCHAR(255) NULL,
+    apartament VARCHAR(255) NULL,
+    postal_code VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE stores (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE products (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    store_id INT UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(1024) NOT NULL,
+    stock INT UNSIGNED NOT NULL,
+    price DECIMAL(6, 2) NOT NULL,
+    discount TINYINT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (store_id) REFERENCES stores(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE product_sizes (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id INT UNSIGNED NOT NULL,
+    size VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (product_id) REFERENCES products(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE product_colors (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id INT UNSIGNED NOT NULL,
+    color VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (product_id) REFERENCES products(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE product_images (
+    product_id INT UNSIGNED NOT NULL,
+    url VARCHAR(255) NOT NULL UNIQUE,
+
+    FOREIGN KEY (product_id) REFERENCES products(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE orders (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    address_id INT UNSIGNED NOT NULL,
+    total_price DECIMAL(8, 2),
+    status ENUM("DELIVERED", "SHIPPED", "DECLINED"),
+    invoice_number VARCHAR(255) NOT NULL UNIQUE,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    FOREIGN KEY (address_id) REFERENCES addresses(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE order_products (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    order_id INT UNSIGNED NOT NULL,
+    product_id INT UNSIGNED NOT NULL,
+    product_size_id INT UNSIGNED NOT NULL,
+    product_color_id INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    price DECIMAL(8, 2) NOT NULL,
+    discount TINYINT UNSIGNED NOT NULL,
+
+  FOREIGN KEY (order_id) REFERENCES orders(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+  FOREIGN KEY (product_id) REFERENCES products(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+  FOREIGN KEY (product_color_id) REFERENCES product_colors(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+  FOREIGN KEY (product_size_id) REFERENCES product_sizes(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+```
 </details>
