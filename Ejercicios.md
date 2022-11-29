@@ -1,6 +1,6 @@
 # Ejercicio 1: Lista de tareas
 
-Queremos hacer una apliación donde cada usuario disponga de una lista para
+Queremos hacer una aplicación donde cada usuario disponga de una lista para
 añadir tareas y marcarlas como completadas. Los usuarios se registrarán mediante
 correo y contraseña, aunque también nos interesa almacenar su nombre completo.
 Para cada tarea, queremos almacenar su título, descripción, estado (completada
@@ -10,8 +10,9 @@ o no completada) y fecha límite para completarla.
 
 Queremos almacenar información sobre los taxistas y vehículos que conducen en
 nuestra provincia. De cada taxista queremos saber su nombre y número de
-teléfono, y de cada vehículo queremos saber su marca, modelo y número de
-matrícula. Aparte de estos datos, necesitamos almacenar unas cuantas imágenes
+teléfono. De cada vehículo queremos saber su marca, modelo y número de
+matrícula. 
+Aparte de estos datos, necesitamos almacenar unas cuantas imágenes
 del vehículo para tener un seguimiento de los accidentes o desperfectos.
 
 Además, en la provincia existen varios garajes/parkings donde se estacionarán
@@ -19,14 +20,14 @@ los vehículos una vez terminada la jornada laboral. Cada parking tiene una
 dirección y nos interesa saber qué vehículos están estacionados en los parkings
 en un momento dado.
 
-Cada vehículo solo puede ser utilizado al mismo tiempo por un taxista, y
-nuestra apliación permitirá definir el periodo en el cual dicho taxista conduce
-el vehículo, por ejemplo desde el 12 de abril de 2022 hasta el 16 de octubre de
+Cada vehículo solo puede ser utilizado por un taxista al mismo tiempo y
+nuestra apliación permitirá definir el periodo en el cual, dicho taxista conduce
+el vehículo, por ejemplo, desde el 12 de abril de 2022 hasta el 16 de octubre de
 2022.
 
 # Ejercicio 3: Chat Rooms
 
-Queremos desarrollar una apliación donde los usuarios puedan crear salas de chat
+Queremos desarrollar una aplicación donde los usuarios puedan crear salas de chat
 y asignar distintos roles a cada miembro de la sala. Los usuarios se registrarán
 mediante correo y contraseña, aunque también almacenaremos su nombre completo y
 dispondrán de un nombre de usuario único.
@@ -50,15 +51,15 @@ han adquirido. De cada cliente queremos saber el número de su documento de
 identidad y su nombre completo.
 
 Los seguros pueden cubrir gastos de reparación en caso de daños para propiedades
-(casas, apartamentos, etc) o para vehículos. En el caso de las propiedades nos
+(casas, apartamentos, etc) o para vehículos. En el caso de las propiedades, nos
 interesa almacenar los metros cuadrados totales de la propiedad así como su
-dirección, mientras que en el caso de los vehículos queremos almacenar su precio
+dirección. En el caso de los vehículos, queremos almacenar su precio
 de compra y su número de matrícula. Estos datos nos servirán para calcular el
 coste anual del seguro que deberá pagar el cliente.
 
 El cliente podrá elegir cuál es el porcentaje de los gastos totales de
-reparación que cubrirá el seguro al contratarlo, por ejemplo un 40%. Este dato
-también será necesario para calcular el precio anual.
+reparación que cubrirá el seguro al contratarlo. Por ejemplo un 40%. 
+Este dato también será necesario para calcular el precio anual.
 
 # Ejercicio 5: Departamentos y empleados
 
@@ -67,23 +68,23 @@ en cada una de ellas se encuentran distintos departamentos. Los edificios tienen
 un número asociado, que es único entre los edificios de la misma ciudad pero
 puede repetirse para edificios de ciudades distintas.
 
-Sobre los departamentos queremos almacenar su nombre, que es único, su número
+Sobre los departamentos, queremos almacenar su nombre, que es único, su número
 de departamento, que también es único, y su presupuesto anual. Por otro lado,
 queremos saber en qué departamento trabaja cada empleado, para lo cual
 disponemos de su número de empleado, que es único dentro de cada departamento,
-pero puede repetirse para empleados de diferentes departamentos. Y para
-terminar, los empleados pueden tener a su cargo a otros empleados, queremos
+pero puede repetirse para empleados de diferentes departamentos.
+Para terminar, los empleados pueden tener a su cargo a otros empleados, queremos
 almacenar esta información.
 
 # Ejercicio 6: Red social
 
-Vamos a desarrollar una apliación similar a Instagram donde los usuarios podrán
+Vamos a desarrollar una aplicación similar a Instagram donde los usuarios podrán
 subir posts a su perfil y seguir a otros usuarios.
 
 Los usuarios se registrarán con correo y contraseña, pero tendrán que elegir un
 nombre de usuario único y una imagen de perfil (la imagen es opcional) para
-completar el registro. Si los datos son válidos se les creará automáticamente un
-perfil al registrarse.
+completar el registro. 
+Si los datos son válidos se les creará automáticamente un perfil al registrarse.
 
 Un usuario puede seguir los perfiles de otros usuarios para ver su contenido, y
 puede subir posts a su perfil para que otros usuarios los vean. Cada post puede
