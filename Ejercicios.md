@@ -21,7 +21,7 @@ dirección y nos interesa saber qué vehículos están estacionados en los parki
 en un momento dado.
 
 Cada vehículo solo puede ser utilizado por un taxista al mismo tiempo y
-nuestra apliación permitirá definir el periodo en el cual, dicho taxista conduce
+nuestra aplicación permitirá definir el periodo en el cual, dicho taxista conduce
 el vehículo, por ejemplo, desde el 12 de abril de 2022 hasta el 16 de octubre de
 2022.
 
@@ -52,13 +52,13 @@ identidad y su nombre completo.
 
 Los seguros pueden cubrir gastos de reparación en caso de daños para propiedades
 (casas, apartamentos, etc) o para vehículos. En el caso de las propiedades, nos
-interesa almacenar los metros cuadrados totales de la propiedad así como su
+interesa almacenar los metros cuadrados totales de la propiedad, así como su
 dirección. En el caso de los vehículos, queremos almacenar su precio
 de compra y su número de matrícula. Estos datos nos servirán para calcular el
 coste anual del seguro que deberá pagar el cliente.
 
 El cliente podrá elegir cuál es el porcentaje de los gastos totales de
-reparación que cubrirá el seguro al contratarlo. Por ejemplo un 40%. 
+reparación que cubrirá el seguro al contratarlo. Por ejemplo, un 40%. 
 Este dato también será necesario para calcular el precio anual.
 
 # Ejercicio 5: Departamentos y empleados
@@ -91,22 +91,22 @@ puede subir posts a su perfil para que otros usuarios los vean. Cada post puede
 tener como máximo 10 imágenes, dispondrá también de una descripción opcional y
 almacenaremos la fecha de creación del post.
 
-Los usuarios podrán escibir comentarios en los posts de otros usuarios o en
+Los usuarios podrán escribir comentarios en los posts de otros usuarios o en
 sus propios posts. De cada comentario nos interesa almacenar el texto y la fecha
 en la que se ha publicado.
 
 # Ejercicio 7: App de pagos
 
-Queremos hacer una apliación similar a PayPal donde los usuarios dispongan de
+Queremos hacer una aplicación similar a PayPal donde los usuarios dispongan de
 cuentas con saldo y puedan hacer transferencias a otros usuarios. Los
 usuarios se registrarán mediante correo y contraseña, aunque almacenaremos
 también su nombre completo.
 
 Cada usuario podrá crear varias cuentas, que pueden ser normales o de empresa.
-Para cada cuenta, almacenarmos su saldo actual en €, su nombre y una descripción
+Para cada cuenta, almacenaremos su saldo actual en €, su nombre y una descripción
 proporcionada por el usuario.
 
-Si la cuenta es normal, no almacenarmos más información asociada a ella. Sin
+Si la cuenta es normal, no almacenaremos más información asociada a ella. Sin
 embargo, si la cuenta es de empresa, almacenaremos el nombre de la empresa y
 su número de identificación fiscal o *tax ID*.
 
@@ -115,14 +115,14 @@ almacenar la cantidad transferida, la fecha incluyendo hora y minuto y el estado
 de la transferencia, que puede ser "pagado" o "reembolsado".
 
 Del mismo modo, los usuarios podrán transferir dinero desde sus cuentas de
-la apliación a sus cuenta bancarias, o recibir dinero desde su banco
+la aplicación a sus cuentas bancarias, o recibir dinero desde su banco
 para aumentar el saldo en la app. Por lo tanto, el usuario podrá asociar
 varias cuentas bancarias a cada cuenta creada en la aplicación. De las cuentas
 bancarias queremos almacenar su número de cuenta.
 
 Para cada transferencia que ocurre entre un banco y nuestra app queremos saber
 la dirección en la que se ha transferido el dinero (si se ha hecho desde la app
-al banco o viceversa). Además, como las transferencia bancarias pueden tardar
+al banco o viceversa). Además, como las transferencias bancarias pueden tardar
 varios días queremos saber su estado ("procesando", "completada", "cancelada"),
 así como la fecha de emisión de la transferencia y la fecha de finalización
 (cuando se ha completado o cancelado).
@@ -138,7 +138,7 @@ como los productos que vende. Para cada producto almacenaremos su nombre,
 una descripción, el *stock* actual, el precio actual y el descuento actual.
 Además, es posible que algunos productos cuenten con distintos tamaños y colores
 (por ejemplo, un monitor puede estar disponible en distintas resoluciones y
-pulgadas), por lo tanto queremos permitir a los usuarios almacenar esta
+pulgadas), por lo tanto, queremos permitir a los usuarios almacenar esta
 información. Finalmente, cada producto contará con al menos una imagen o varias.
 Los productos son únicos para cada tienda, es decir, aunque haya varias tiendas
 vendiendo el mismo producto, cada una de ellas tiene que crearlo por separado
