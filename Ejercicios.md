@@ -128,7 +128,7 @@ los otros campos del pedido. Por último, como el pedido puede tardar varios dí
 en prepararse, enviarse y llegar a su destino, queremos almacenar su estado
 ("procesando", "enviado", "entregado", "cancelado").
 
-# Proyect final: App de pagos
+# Proyecto final: App de pagos
 
 Queremos hacer una apliación similar a PayPal donde los usuarios dispongan de
 cuentas con saldo y puedan hacer transferencias a otros usuarios. Los

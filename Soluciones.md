@@ -789,7 +789,7 @@ CREATE TABLE order_products (
 ```
 </details>
 
-# Proyect final: App de pagos
+# Proyecto final: App de pagos
 
 Queremos hacer una apliación similar a PayPal donde los usuarios dispongan de
 cuentas con saldo y puedan hacer transferencias a otros usuarios. Los
